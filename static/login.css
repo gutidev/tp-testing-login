@@ -60,3 +60,14 @@
 .login-right p {
   color: rgba(255, 255, 255, 0.8);
 }
+.input-error {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
