@@ -15,9 +15,9 @@ def login():
     usuario = request.form['username']
     contrasena = request.form['password']
     if usuario == USUARIO and contrasena == CONTRASENA:
-        return f'Bienvenido, {usuario}!'
+        return render_template('status.html')
     else:
-        return 'Usuario o contraseña incorrectos', 401
+        return render_template('login.html', error='Usuario o contraseña incorrectos', username=usuario)
 
 if __name__ == '__main__':
     app.run(debug=True)

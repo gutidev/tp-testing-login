@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../static/style.css" />
+    <link rel="stylesheet" type="text/css" href="../static/login.css" />
     <title>Login</title>
 </head>
 
@@ -16,14 +16,25 @@
                 <p>
                     <small>Need an account? <a href="#!">Get Started!</a></small>
                 </p>
+
                 <form action="{{ url_for('login') }}" method="post">
-                    <input for="username" type="username" name="username" placeholder="Username" />
-                    <input for="password" type="password" name="password" placeholder="Password" />
+                    {% if error %}
+                    <div class="error-message">{{ error }}</div>
+                    {% endif %}
+
+                    <input type="text" name="username" placeholder="Username"
+                        class="{% if error %}input-error{% endif %}" value="{{ username | default('') }}" />
+
+                    <input type="password" name="password" placeholder="Password"
+                        class="{% if error %}input-error{% endif %}" />
+
                     <button class="submit">Sign In</button>
+
                     <p>
                         <small><a href="#!">Forgot Password?</a></small>
                     </p>
                 </form>
+
             </div>
             <div class="login-right">
                 <h2>Here To Help</h2>
