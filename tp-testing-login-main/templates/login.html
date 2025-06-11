@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../static/style.css" />
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="login-wrapper">
+        <div class="login-box">
+            <div class="login-left">
+                <img src="../static/LogoUADE.png" alt="All Time Design Logo" />
+                <h3>Registrarse</h3>
+                <p>
+                    <small>Need an account? <a href="register.html">Registrate</a></small>
+                </p>
+                <form action="{{ url_for('login') }}" method="post">
+                    <input for="username" type="username" name="username" placeholder="Username" />
+                    <input for="password" type="password" name="password" placeholder="Password" />
+                    <button class="submit">Sign In</button>
+                    <p>
+                        <small><a href="#!">Forgot Password?</a></small>
+                    </p>
+                </form>
+            </div>
+            <div class="login-right">
+                <h2>Here To Help</h2>
+                <p>
+                    No matter where you are in your journey, we're here to help. Do you
+                    have any queries? Reach out our Customer Success team
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
