@@ -12,36 +12,22 @@
         <div class="login-box">
             <div class="login-left">
                 <img src="../static/LogoUADE.png" alt="All Time Design Logo" />
-                <h3>Sign In</h3>
+                <h3>Login</h3>
                 <p>
-                    <small>Need an account? <a href="#!">Get Started!</a></small>
+                    <small>¿No tienes una cuenta? </small>
+                    <a href="{{ url_for('registro') }}">Registrate</a>
                 </p>
-
                 <form action="{{ url_for('login') }}" method="post">
-                    {% if error %}
-                    <div class="error-message">{{ error }}</div>
-                    {% endif %}
-
-                    <input type="text" name="username" placeholder="Username"
-                        class="{% if error %}input-error{% endif %}" value="{{ username | default('') }}" />
-
-                    <input type="password" name="password" placeholder="Password"
-                        class="{% if error %}input-error{% endif %}" />
-
-                    <button class="submit">Sign In</button>
-
+                    <input for="username" type="username" name="username" placeholder="Username" />
+                    <input for="password" type="password" name="password" placeholder="Password" />
+                    <button class="submit">Ingresar</button>
                     <p>
-                        <small><a href="#!">Forgot Password?</a></small>
+                        <small><a href="#!">¿Olvidaste la contraseña?</a></small>
                     </p>
                 </form>
-
             </div>
             <div class="login-right">
-                <h2>Here To Help</h2>
-                <p>
-                    No matter where you are in your journey, we're here to help. Do you
-                    have any queries? Reach out our Customer Success team
-                </p>
+
             </div>
         </div>
     </div>

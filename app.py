@@ -19,6 +19,11 @@ def login():
     else:
         return render_template('login.html', error='Usuario o contraseña incorrectos', username=usuario)
 
+@app.route('/registro')
+def registro():
+    return render_template('register.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
