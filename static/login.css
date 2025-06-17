@@ -64,6 +64,11 @@ body {
 .login-right p {
   color: rgba(255, 255, 255, 0.8);
 }
+
+.uade-color {
+  color: #475ab3;
+}
+
 .input-error {
   border: 2px solid red;
   background-color: #ffe6e6;
@@ -71,11 +76,11 @@ body {
 
 .error-message {
   color: red;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-  text-align: left;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
 }
 
-.uade-color {
-  color: #475ab3;
+.success {
+  color: green;
+  margin-bottom: 1rem;
 }

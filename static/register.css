@@ -68,3 +68,8 @@ body {
 .form-box .footer a:hover {
   text-decoration: underline;
 }
+
+.input-error {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}

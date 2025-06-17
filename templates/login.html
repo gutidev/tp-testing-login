@@ -19,12 +19,30 @@
                         ¿No tienes una cuenta? <a href="{{ url_for('registro') }}">Registrate</a>
                     </small>
                 </p>
-                <form action="{{ url_for('login') }}" method="post">
-                    <input for="username" type="username" name="username" placeholder="Username" />
-                    <input for="password" type="password" name="password" placeholder="Password" />
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="success">
+                    {{ messages[0] }}
+                </div>
+                {% endif %}
+                {% endwith %}
+                <form action="{{ url_for('status') }}" method="post">
+                    <input type="text" name="username" placeholder="Username"
+                        class="{% if error_usuario %}input-error{% endif %}" value="{{ username | default('') }}"
+                        required />
+                    {% if error_usuario %}
+                    <div class="error-message">{{ error_usuario }}</div>
+                    {% endif %}
+                    <input type="password" name="password" placeholder="Password"
+                        class="{% if error_contrasena %}input-error{% endif %}" required />
+                    {% if error_contrasena %}
+                    <div class="error-message">{{ error_contrasena }}</div>
+                    {% endif %}
                     <button class="submit">Ingresar</button>
                     <p>
-                        <small><a href="#!" class="uade-color">¿Olvidaste la contraseña?</a></small>
+                        <small>
+                            <a href="{{ url_for('change_password') }}" class="uade-color">¿Olvidaste la contraseña?</a>
+                        </small>
                     </p>
                 </form>
             </div>
