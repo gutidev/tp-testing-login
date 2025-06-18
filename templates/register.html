@@ -13,8 +13,7 @@
     <h2>Crear cuenta</h2>
     <p>Regístrate para acceder a UADE</p>
     <form action="{{ url_for('register') }}" method="POST">
-      <input type="text" name="full-name" placeholder="Nombre Completo" class="{% if error %}input-error{% endif %}"
-        required>
+      <input type="text" name="full-name" placeholder="Usuario" class="{% if error %}input-error{% endif %}" required>
       <input type="email" name="email" placeholder="Correo Electrónico" class="{% if error %}input-error{% endif %}"
         required>
       <input type="password" name="password" placeholder="Contraseña" class="{% if error %}input-error{% endif %}"

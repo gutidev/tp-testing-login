@@ -13,11 +13,11 @@
         <div class="login-box">
             <div class="login-left">
                 <img src="../static/LogoUADE.png" alt="All Time Design Logo" />
-                <h3>Login</h3>
-                <p>
-                    <small>
-                        ¿No tienes una cuenta? <a href="{{ url_for('registro') }}">Registrate</a>
-                    </small>
+                <h2>Iniciar sesión</h2>
+                <p style="color: #666; font-weight:normal; margin-bottom: 24px;">
+                    ¿No tienes una cuenta?
+                    <a href="{{ url_for('registro') }}" class="uade-color"
+                        style="text-decoration: unset;">Registrate</a>
                 </p>
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
@@ -27,27 +27,26 @@
                 {% endif %}
                 {% endwith %}
                 <form action="{{ url_for('status') }}" method="post">
-                    <input type="text" name="username" placeholder="Username"
+                    <input type="text" name="username" placeholder="Usuario"
                         class="{% if error_usuario %}input-error{% endif %}" value="{{ username | default('') }}"
                         required />
                     {% if error_usuario %}
                     <div class="error-message">{{ error_usuario }}</div>
                     {% endif %}
-                    <input type="password" name="password" placeholder="Password"
+                    <input type="password" name="password" placeholder="Contraseña"
                         class="{% if error_contrasena %}input-error{% endif %}" required />
                     {% if error_contrasena %}
                     <div class="error-message">{{ error_contrasena }}</div>
                     {% endif %}
                     <button class="submit">Ingresar</button>
                     <p>
-                        <small>
-                            <a href="{{ url_for('change_password') }}" class="uade-color">¿Olvidaste la contraseña?</a>
-                        </small>
+                        <a href="{{ url_for('change_password') }}" class="uade-color"
+                            style="font-weight:normal; text-decoration: unset;">¿Olvidaste la contraseña?</a>
                     </p>
                 </form>
             </div>
             <div class="login-right">
-
+                <h3>Más que una Universidad</h3>
             </div>
         </div>
     </div>
