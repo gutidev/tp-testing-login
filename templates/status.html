@@ -9,73 +9,81 @@
 </head>
 
 <body>
-    <div class="usuario-avatar" onclick="toggleMenu()">
-        <img src="{{ url_for('static', filename='transparent-default-avatar.png') }}" alt="Avatar" class="avatar-img">
-        <span>{{ nombre }}</span>
+    <div style="max-width: max-content; background-color: white; width: -webkit-fill-available; margin-top: 40px;">
+        <div class="usuario-avatar" onclick="toggleMenu()">
+            <img src="{{ url_for('static', filename='transparent-default-avatar.png') }}" alt="Avatar"
+                class="avatar-img">
+            <span>{{ nombre }}</span>
 
-        <div class="dropdown-menu" id="userMenu">
-            <a href="#">Ver perfil</a>
-            <a href="{{ url_for('change_password') }}">Cambiar contraseña</a>
-            <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+            <div class="dropdown-menu" id="userMenu">
+                <a href="#">Ver perfil</a>
+                <a href="{{ url_for('change_password') }}">Cambiar contraseña</a>
+                <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+            </div>
+        </div>
+
+        <div class="header {% if 'Incidencia Reportada' in estados.values() %}incidencia{% endif %}">
+            {% if 'Incidencia Reportada' in estados.values() %}
+            <h2>Hay incidencias reportadas ⚠</h2>
+            {% else %}
+            <h2>Todos los sistemas funcionan correctamente ✔</h2>
+            {% endif %}
+        </div>
+
+        <div class="container">
+            <h3 style="padding-left: 16px;">UADE - Estado del servicio</h3>
+            <table>
+                {% for servicio, estado in estados.items() %}
+                <tr>
+                    <td>{{ servicio }}</td>
+                    <td class="status {% if estado == 'Incidencia Reportada' %}warning{% endif %}"
+                        style="display: flex; flex-direction: column-reverse; align-items: end;">
+                        {% if estado == 'Incidencia Reportada' and session['usuario'] == 'admin' %}
+                        <form method="POST" action="{{ url_for('restablecer_estado') }}" style="display:inline;">
+                            <input type="hidden" name="servicio" value="{{ servicio }}">
+                            <button type="submit" class="restablecer-btn">
+                                <svg class="icono-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M10 9V5l-7 7 7 7v-4h4v-6h-4z" />
+                                </svg>
+                                Restablecer
+                            </button>
+                        </form>
+                        {% endif %}
+                        {{ estado }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <!-- Botón fijo al final de la página -->
+        <div class="report-footer">
+            <a href="#" onclick="toggleIncidentForm()">🛠 Reportar incidente</a>
+        </div>
+        <!-- Formulario emergente -->
+        <div class="incident-form-overlay" id="incidentForm">
+            <div class="incident-form-box">
+                <h3>Reportar Incidente</h3>
+                <form method="POST" action="/reportar_incidente">
+                    <label for="servicio">¿En qué sistema ocurrió?</label>
+                    <select name="servicio" id="servicio" required>
+                        <option value="">-- Seleccionar --</option>
+                        {% for s in estados.keys() %}
+                        <option value="{{ s }}">{{ s }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label for="detalle">Detalle del incidente</label>
+                    <textarea name="detalle" id="detalle" placeholder="Describí el incidente..." required></textarea>
+
+                    <div class="incident-buttons">
+                        <button class="report-buttons" type="submit">Enviar</button>
+                        <button class="report-buttons" type="button" onclick="toggleIncidentForm()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-
-    <div class="header {% if 'Incidencia Reportada' in estados.values() %}incidencia{% endif %}">
-        {% if 'Incidencia Reportada' in estados.values() %}
-        <h2>Hay incidencias reportadas ⚠</h2>
-        {% else %}
-        <h2>Todos los sistemas funcionan correctamente ✔</h2>
-        {% endif %}
-    </div>
-
-    <div class="container">
-        <h3>Estado actual: UADE</h3>
-        <table>
-            {% for servicio, estado in estados.items() %}
-            <tr>
-                <td>{{ servicio }}</td>
-                <td class="status {% if estado == 'Incidencia Reportada' %}warning{% endif %}">
-                    {% if estado == 'Incidencia Reportada' and session['usuario'] == 'admin' %}
-                    <form method="POST" action="{{ url_for('restablecer_estado') }}" style="display:inline;">
-                        <input type="hidden" name="servicio" value="{{ servicio }}">
-                        <button type="submit">Restablecer</button>
-                    </form>
-                    {% endif %}
-                    {{ estado }}
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-
-    <!-- Botón fijo al final de la página -->
-    <div class="report-footer">
-        <a href="#" onclick="toggleIncidentForm()">🛠 Reportar incidente</a>
-    </div>
-    <!-- Formulario emergente -->
-    <div class="incident-form-overlay" id="incidentForm">
-        <div class="incident-form-box">
-            <h3>Reportar Incidente</h3>
-            <form method="POST" action="/reportar_incidente">
-                <label for="servicio">¿En qué sistema ocurrió?</label>
-                <select name="servicio" id="servicio" required>
-                    <option value="">-- Seleccionar --</option>
-                    {% for s in estados.keys() %}
-                    <option value="{{ s }}">{{ s }}</option>
-                    {% endfor %}
-                </select>
-
-                <label for="detalle">Detalle del incidente</label>
-                <textarea name="detalle" id="detalle" placeholder="Describí el incidente..." required></textarea>
-
-                <div class="incident-buttons">
-                    <button type="submit">Enviar</button>
-                    <button type="button" onclick="toggleIncidentForm()">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
 
     <script>
         function toggleMenu() {

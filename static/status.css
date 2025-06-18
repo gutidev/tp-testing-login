@@ -1,8 +1,10 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f5f7fa;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(239 246 255);
 }
 
 .header {
@@ -17,12 +19,11 @@ body {
 }
 
 .container {
-    margin: 2em auto;
-    max-width: 800px;
+    width: 800px;
     background: white;
     border-radius: 8px;
-    padding: 2em;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 2em 2em 0 2em;
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
 }
 
 table {
@@ -85,8 +86,12 @@ td {
 }
 
 .report-footer a {
-  color: #007bff;
+  color: #475ab3;
   cursor: pointer;
+  text-decoration: none;
+}
+
+.report-footer a:hover {
   text-decoration: underline;
 }
 
@@ -114,8 +119,7 @@ td {
 }
 
 .incident-form-box textarea {
-  width: 100%;
-  height: 120px;
+  width: 97%;
   margin-bottom: 1rem;
   padding: 0.5rem;
   border-radius: 5px;
@@ -148,12 +152,46 @@ select {
 .status form button {
   background-color: transparent;
   border: none;
-  color: #007bff;
   cursor: pointer;
-  font-size: 0.8rem;
-  margin-left: 10px;
+  font-size: 1rem;
+  color: #475ab3;
+  padding: 0px;
+  display: flex;
+    justify-content: unset;
+    align-items: center;
+    flex-direction: row;
 }
 
 .status form button:hover {
   text-decoration: underline;
+}
+
+.restablecer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #475ab3;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.icono-btn {
+    margin-right: -8px;
+    width: 16px;
+    height: 18px;
+    fill: currentColor;
+}
+
+.report-buttons {
+    width: auto;
+    padding: 8px;
+    background-color: #475ab3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
